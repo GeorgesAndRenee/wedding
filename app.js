@@ -14,8 +14,8 @@ const TABLE = "photos";
 // Client-side limits (also set matching limits on the bucket itself
 // in the Supabase dashboard — see README.md — since anyone can bypass
 // checks that only run in the browser).
-const MAX_FILES_PER_BATCH = 15;
-const MAX_FILE_SIZE_MB = 15;
+const MAX_FILES_PER_BATCH = 25;
+const MAX_FILE_SIZE_MB = 25;
 
 // ---------------------------------------------------------------------
 
