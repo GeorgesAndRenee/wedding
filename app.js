@@ -5,8 +5,8 @@
 // Security policies you set up in the dashboard/SQL editor, not by
 // keeping this key secret.
 // =====================================================================
-const SUPABASE_URL = "https://YOUR-PROJECT-REF.supabase.co";
-const SUPABASE_ANON_KEY = "YOUR-PUBLIC-ANON-KEY";
+const SUPABASE_URL = "https://hhuremghrfgpxyjjxtrq.supabase.co";
+const SUPABASE_ANON_KEY = "sb_publishable_-yS_D38jzS-5j1Xwk2Qn4A_Ug-hkqHW";
 
 const BUCKET = "wedding-photos";
 const TABLE = "photos";
