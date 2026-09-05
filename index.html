@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Georges &amp; Renée — Share Your Photos</title>
+<meta name="description" content="Share the photos you took at Georges & Renée's wedding — they'll appear in the gallery right away.">
+
+<!-- ================================================================
+     EDIT ME: change the title above and the couple's names throughout
+     this file (search for "Georges" and "Renée") to match your wedding.
+     ================================================================ -->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero__content">
+    <p class="hero__date">September 12 · 2026</p>
+    <h1 class="hero__names">Georges <span class="hero__amp">&amp;</span> Renée</h1>
+    <p class="hero__tagline">We want to see our wedding day through your eyes. Share the photos you take today and watch them appear here as the celebration unfolds.</p>
+    <a href="#upload" class="btn btn--primary">Share your photos</a>
+  </div>
+</header>
+
+<main>
+
+  <section class="section how" aria-labelledby="how-heading">
+    <div class="container">
+      <h2 id="how-heading" class="section__heading">How it works</h2>
+      <ol class="steps">
+        <li class="step">
+          <span class="step__number">1</span>
+          <h3 class="step__title">Take photos</h3>
+          <p class="step__text">Snap away during the ceremony and reception, on any phone or camera you like.</p>
+        </li>
+        <li class="step">
+          <span class="step__number">2</span>
+          <h3 class="step__title">Upload here</h3>
+          <p class="step__text">Add your name and drop them in below. No app or account needed.</p>
+        </li>
+        <li class="step">
+          <span class="step__number">3</span>
+          <h3 class="step__title">Watch it grow</h3>
+          <p class="step__text">Every photo joins the gallery right away, for everyone to enjoy today and after.</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="section upload" id="upload" aria-labelledby="upload-heading">
+    <div class="container container--narrow">
+      <h2 id="upload-heading" class="section__heading">Share your photos</h2>
+      <p class="section__lede">A few photos or a whole album — either way, we'd love to see it.</p>
+
+      <form class="upload-form" id="upload-form" novalidate>
+        <div class="field">
+          <label for="guest-name">Your name</label>
+          <input type="text" id="guest-name" name="guest-name" maxlength="60" placeholder="Full Name" autocomplete="name" required>
+        </div>
+
+        <div class="dropzone" id="dropzone" tabindex="0" role="button" aria-label="Choose photos to upload">
+          <p class="dropzone__text">Drag photos here, or tap to choose</p>
+          <p class="dropzone__hint">JPG, PNG or HEIC · up to 15&nbsp;MB each</p>
+          <input type="file" id="file-input" accept="image/*" multiple hidden>
+        </div>
+
+        <ul class="file-list" id="file-list" aria-live="polite"></ul>
+
+        <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
+
+        <button type="submit" class="btn btn--primary btn--full" id="upload-btn" disabled>Upload photos</button>
+      </form>
+    </div>
+  </section>
+
+  <section class="section gallery" id="gallery" aria-labelledby="gallery-heading">
+    <div class="container">
+      <h2 id="gallery-heading" class="section__heading">Moments so far</h2>
+      <p class="empty-state" id="empty-state" hidden>No photos yet — be the first to share a memory.</p>
+      <div class="photo-grid" id="photo-grid"></div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <p class="footer__names">Georges &amp; Renée</p>
+  <p class="footer__thanks">Thank you for celebrating with us — and for every photo you share.</p>
+</footer>
+
+<div class="lightbox" id="lightbox" hidden>
+  <button class="lightbox__close" id="lightbox-close" aria-label="Close">&times;</button>
+  <figure class="lightbox__figure">
+    <img class="lightbox__img" id="lightbox-img" src="" alt="">
+    <figcaption class="lightbox__caption" id="lightbox-caption"></figcaption>
+  </figure>
+</div>
+
+<!-- Supabase client library (loaded from a CDN, no build step required) -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="app.js"></script>
+</body>
+</html>

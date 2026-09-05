@@ -1,0 +1,418 @@
+/* =========================================================
+   Design tokens — edit these to reskin the whole site
+   ========================================================= */
+:root {
+  --ink: #1E2B22;
+  --ink-2: #16201A;
+  --parchment: #F6F1E4;
+  --paper: #FFFDF8;
+  --gold: #A9832F;
+  --gold-light: #D9C48C;
+  --rose: #B97B6E;
+  --charcoal: #2A2620;
+
+  --font-display: "Fraunces", Georgia, serif;
+  --font-body: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+
+  --max-width: 1080px;
+  --radius: 3px;
+}
+
+/* =========================================================
+   Reset & base
+   ========================================================= */
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; }
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  color: var(--charcoal);
+  background: var(--parchment);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3 { font-family: var(--font-display); margin: 0; font-weight: 500; }
+
+p { margin: 0; }
+
+a { color: inherit; }
+
+img { max-width: 100%; display: block; }
+
+:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+}
+
+.container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 24px;
+}
+.container--narrow { max-width: 640px; }
+
+.section { padding: 96px 0; }
+.section__heading {
+  font-size: clamp(1.75rem, 3vw, 2.25rem);
+  text-align: center;
+  margin-bottom: 12px;
+}
+.section__lede {
+  text-align: center;
+  max-width: 46ch;
+  margin: 0 auto 48px;
+  color: color-mix(in srgb, var(--charcoal) 75%, transparent);
+}
+
+/* =========================================================
+   Buttons
+   ========================================================= */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 15px 34px;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 500;
+  text-decoration: none;
+  border: 1px solid var(--gold);
+  border-radius: var(--radius);
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+.btn--primary {
+  background: var(--gold);
+  border-color: var(--gold);
+  color: var(--paper);
+}
+.btn--primary:hover { background: color-mix(in srgb, var(--gold) 85%, black); }
+.btn--full { width: 100%; }
+.btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+.btn:disabled:hover { background: var(--gold); }
+
+/* =========================================================
+   Hero
+   ========================================================= */
+.hero {
+  position: relative;
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* Photo + a top-to-bottom tint (in the same ink-green as the rest of
+     the site) so the white text stays readable over any part of the
+     image. Adjust the position ("center 30%") if a different part of
+     the photo should stay in frame on wide screens. */
+  background:
+    linear-gradient(180deg, rgba(22, 32, 26, 0.62) 0%, rgba(22, 32, 26, 0.4) 45%, rgba(22, 32, 26, 0.8) 100%),
+    url("hero.jpg") center 30% / cover no-repeat;
+  color: var(--paper);
+  overflow: hidden;
+  padding: 48px 24px;
+}
+
+.hero__content {
+  position: relative;
+  text-align: center;
+  max-width: 640px;
+}
+
+.hero__date,
+.hero__names,
+.hero__tagline,
+.hero__content .btn {
+  opacity: 0;
+  animation: rise 0.9s ease forwards;
+}
+.hero__date { animation-delay: 0.1s; }
+.hero__names { animation-delay: 0.3s; }
+.hero__tagline { animation-delay: 0.5s; }
+.hero__content .btn { animation-delay: 0.7s; }
+
+@keyframes rise {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero__date, .hero__names, .hero__tagline, .hero__content .btn {
+    opacity: 1; animation: none; transform: none;
+  }
+}
+
+.hero__date {
+  font-family: var(--font-body);
+  letter-spacing: 0.04em;
+  color: var(--gold-light);
+  margin-bottom: 20px;
+  font-size: 0.95rem;
+}
+
+.hero__names {
+  font-size: clamp(3rem, 9vw, 5.5rem);
+  line-height: 1;
+  margin-bottom: 28px;
+}
+.hero__amp {
+  font-style: italic;
+  color: var(--gold-light);
+  padding: 0 0.15em;
+}
+
+.hero__tagline {
+  font-size: 1.05rem;
+  color: color-mix(in srgb, var(--paper) 82%, transparent);
+  max-width: 46ch;
+  margin: 0 auto 40px;
+}
+
+/* =========================================================
+   How it works
+   ========================================================= */
+.steps {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+  text-align: center;
+}
+.step__number {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--gold);
+  border-radius: 50%;
+  font-family: var(--font-display);
+  color: var(--gold);
+  margin-bottom: 20px;
+}
+.step__title {
+  font-size: 1.15rem;
+  margin-bottom: 10px;
+}
+.step__text {
+  color: color-mix(in srgb, var(--charcoal) 75%, transparent);
+  font-size: 0.95rem;
+  max-width: 32ch;
+  margin: 0 auto;
+}
+
+@media (max-width: 720px) {
+  .steps { grid-template-columns: 1fr; gap: 36px; }
+}
+
+/* =========================================================
+   Upload form
+   ========================================================= */
+.upload { background: var(--paper); }
+
+.upload-form {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.field label {
+  display: block;
+  font-size: 0.85rem;
+  margin-bottom: 8px;
+  color: color-mix(in srgb, var(--charcoal) 80%, transparent);
+}
+.field input[type="text"] {
+  width: 100%;
+  padding: 13px 14px;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  border: 1px solid color-mix(in srgb, var(--charcoal) 25%, transparent);
+  border-radius: var(--radius);
+  background: var(--parchment);
+  color: var(--charcoal);
+}
+.field input[type="text"]:focus { border-color: var(--gold); }
+
+.dropzone {
+  border: 1.5px dashed color-mix(in srgb, var(--gold) 55%, transparent);
+  border-radius: var(--radius);
+  padding: 40px 20px;
+  text-align: center;
+  cursor: pointer;
+  background: var(--parchment);
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+.dropzone:hover,
+.dropzone--active {
+  border-color: var(--gold);
+  background: color-mix(in srgb, var(--gold) 8%, var(--parchment));
+}
+.dropzone__text { font-size: 1rem; margin-bottom: 6px; }
+.dropzone__hint {
+  font-size: 0.85rem;
+  color: color-mix(in srgb, var(--charcoal) 60%, transparent);
+}
+
+.file-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.file-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 10px;
+  background: var(--parchment);
+  border-radius: var(--radius);
+}
+.file-item__thumb {
+  width: 44px;
+  height: 44px;
+  object-fit: cover;
+  border-radius: var(--radius);
+  flex-shrink: 0;
+}
+.file-item__name {
+  flex: 1;
+  font-size: 0.9rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.file-item__status {
+  font-size: 0.8rem;
+  color: color-mix(in srgb, var(--charcoal) 55%, transparent);
+  flex-shrink: 0;
+}
+.file-item__status--done { color: #4B7A5A; }
+.file-item__status--error { color: var(--rose); }
+.file-item__remove {
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-size: 1.1rem;
+  color: color-mix(in srgb, var(--charcoal) 55%, transparent);
+  line-height: 1;
+  padding: 4px;
+}
+.file-item__remove:hover { color: var(--rose); }
+
+.form-status {
+  min-height: 1.2em;
+  font-size: 0.9rem;
+  text-align: center;
+}
+.form-status--error { color: var(--rose); }
+.form-status--success { color: #4B7A5A; }
+
+/* =========================================================
+   Gallery
+   ========================================================= */
+.gallery {
+  background: radial-gradient(120% 120% at 50% 0%, var(--ink) 0%, var(--ink-2) 100%);
+  color: var(--paper);
+}
+.gallery .section__heading { color: var(--paper); }
+
+.empty-state {
+  text-align: center;
+  color: color-mix(in srgb, var(--paper) 70%, transparent);
+  margin-bottom: 8px;
+}
+
+.photo-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 14px;
+}
+
+.photo-card {
+  position: relative;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  border-radius: var(--radius);
+  background: var(--ink-2);
+}
+.photo-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+.photo-card:hover img { transform: scale(1.04); }
+
+.photo-card__name {
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  padding: 18px 10px 8px;
+  font-size: 0.78rem;
+  color: var(--paper);
+  text-align: left;
+  background: linear-gradient(to top, rgba(0,0,0,0.65), transparent);
+}
+
+/* =========================================================
+   Lightbox
+   ========================================================= */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  background: rgba(10, 14, 11, 0.92);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  z-index: 100;
+}
+.lightbox[hidden] { display: none; }
+.lightbox__figure { margin: 0; max-width: 90vw; max-height: 85vh; text-align: center; }
+.lightbox__img { max-width: 100%; max-height: 75vh; margin: 0 auto; border-radius: var(--radius); }
+.lightbox__caption { color: var(--paper); margin-top: 16px; font-size: 0.9rem; }
+.lightbox__close {
+  position: absolute;
+  top: 20px; right: 24px;
+  background: none;
+  border: none;
+  color: var(--paper);
+  font-size: 2rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+/* =========================================================
+   Footer
+   ========================================================= */
+.footer {
+  text-align: center;
+  padding: 56px 24px;
+  background: var(--parchment);
+}
+.footer__names {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  margin-bottom: 8px;
+}
+.footer__thanks {
+  color: color-mix(in srgb, var(--charcoal) 65%, transparent);
+  font-size: 0.9rem;
+}
