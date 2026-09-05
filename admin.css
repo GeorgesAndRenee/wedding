@@ -1,0 +1,167 @@
+:root {
+  --ink: #1E2B22;
+  --parchment: #F6F1E4;
+  --paper: #FFFDF8;
+  --gold: #A9832F;
+  --rose: #B97B6E;
+  --charcoal: #2A2620;
+  --font-display: "Fraunces", Georgia, serif;
+  --font-body: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+  --radius: 3px;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  background: var(--parchment);
+  color: var(--charcoal);
+  line-height: 1.5;
+}
+h1 { font-family: var(--font-display); font-weight: 500; margin: 0; }
+:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 11px 20px;
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  font-weight: 500;
+  border: 1px solid var(--gold);
+  border-radius: var(--radius);
+  background: var(--gold);
+  color: var(--paper);
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+.btn:hover { background: color-mix(in srgb, var(--gold) 85%, black); }
+.btn--ghost {
+  background: transparent;
+  color: var(--charcoal);
+  border-color: color-mix(in srgb, var(--charcoal) 30%, transparent);
+}
+.btn--ghost:hover { background: color-mix(in srgb, var(--charcoal) 8%, transparent); }
+.btn--full { width: 100%; }
+.btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+/* ---------------- Login ---------------- */
+.login-screen {
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+.login-card {
+  width: 100%;
+  max-width: 360px;
+  background: var(--paper);
+  border-radius: var(--radius);
+  padding: 40px 32px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+.login-title { font-size: 1.6rem; margin-bottom: 6px; text-align: center; }
+.login-sub {
+  text-align: center;
+  color: color-mix(in srgb, var(--charcoal) 65%, transparent);
+  margin-bottom: 28px;
+  font-size: 0.9rem;
+}
+.field { margin-bottom: 18px; }
+.field label { display: block; font-size: 0.85rem; margin-bottom: 6px; }
+.field input {
+  width: 100%;
+  padding: 12px 14px;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  border: 1px solid color-mix(in srgb, var(--charcoal) 25%, transparent);
+  border-radius: var(--radius);
+  background: var(--parchment);
+  color: var(--charcoal);
+}
+.field input:focus { border-color: var(--gold); }
+.login-error {
+  min-height: 1.2em;
+  font-size: 0.85rem;
+  color: var(--rose);
+  margin-bottom: 14px;
+  text-align: center;
+}
+
+/* ---------------- Admin screen ---------------- */
+.admin-screen { max-width: 1080px; margin: 0 auto; padding: 40px 24px 80px; }
+.admin-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 8px;
+  flex-wrap: wrap;
+}
+.admin-title { font-size: 1.5rem; }
+.admin-count {
+  color: color-mix(in srgb, var(--charcoal) 60%, transparent);
+  font-size: 0.9rem;
+  margin-top: 4px;
+}
+.admin-actions { display: flex; gap: 10px; }
+.admin-status {
+  min-height: 1.2em;
+  font-size: 0.9rem;
+  color: color-mix(in srgb, var(--charcoal) 65%, transparent);
+  margin: 16px 0;
+}
+.empty-state {
+  text-align: center;
+  color: color-mix(in srgb, var(--charcoal) 55%, transparent);
+  margin: 60px 0;
+}
+
+.admin-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 16px;
+}
+.admin-card {
+  background: var(--paper);
+  border-radius: var(--radius);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+.admin-card__thumb {
+  aspect-ratio: 1 / 1;
+  background: color-mix(in srgb, var(--charcoal) 8%, transparent);
+}
+.admin-card__thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.admin-card__meta { padding: 10px 12px; }
+.admin-card__name { font-size: 0.85rem; font-weight: 500; margin: 0; }
+.admin-card__time {
+  font-size: 0.75rem;
+  color: color-mix(in srgb, var(--charcoal) 55%, transparent);
+  margin: 2px 0 0;
+}
+.admin-card__download {
+  display: block;
+  width: 100%;
+  text-align: center;
+  padding: 8px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  border: none;
+  border-top: 1px solid color-mix(in srgb, var(--charcoal) 10%, transparent);
+  color: var(--gold);
+  cursor: pointer;
+  background: none;
+  font-family: var(--font-body);
+}
+.admin-card__download:hover { background: color-mix(in srgb, var(--gold) 8%, transparent); }
+
+@media (max-width: 560px) {
+  .admin-header { flex-direction: column; }
+  .admin-actions { width: 100%; }
+  .admin-actions .btn { flex: 1; }
+}

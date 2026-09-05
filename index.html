@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Georges &amp; Renée — Share Your Photos</title>
-<meta name="description" content="Share the photos you took at Georges & Renée's wedding — they'll appear in the gallery right away.">
+<meta name="description" content="Share the photos you took at Georges & Renée's wedding — straight to the couple, safely and privately.">
 
 <!-- ================================================================
      EDIT ME: change the title above and the couple's names throughout
@@ -22,7 +22,7 @@
   <div class="hero__content">
     <p class="hero__date">September 12 · 2026</p>
     <h1 class="hero__names">Georges <span class="hero__amp">&amp;</span> Renée</h1>
-    <p class="hero__tagline">We want to see our wedding day through your eyes. Share the photos you take today and watch them appear here as the celebration unfolds.</p>
+    <p class="hero__tagline">We want to see our wedding day through your eyes. Share the photos you take today — we'll treasure every one.</p>
     <a href="#upload" class="btn btn--primary">Share your photos</a>
   </div>
 </header>
@@ -45,8 +45,8 @@
         </li>
         <li class="step">
           <span class="step__number">3</span>
-          <h3 class="step__title">Watch it grow</h3>
-          <p class="step__text">Every photo joins the gallery right away, for everyone to enjoy today and after.</p>
+          <h3 class="step__title">That's it</h3>
+          <p class="step__text">Your photos go straight to Georges &amp; Renée — no public gallery, just for them to enjoy later.</p>
         </li>
       </ol>
     </div>
@@ -60,7 +60,7 @@
       <form class="upload-form" id="upload-form" novalidate>
         <div class="field">
           <label for="guest-name">Your name</label>
-          <input type="text" id="guest-name" name="guest-name" maxlength="60" placeholder="Full Name" autocomplete="name" required>
+          <input type="text" id="guest-name" name="guest-name" maxlength="60" placeholder="e.g. Priya Sharma" autocomplete="name" required>
         </div>
 
         <div class="dropzone" id="dropzone" tabindex="0" role="button" aria-label="Choose photos to upload">
@@ -78,13 +78,6 @@
     </div>
   </section>
 
-  <section class="section gallery" id="gallery" aria-labelledby="gallery-heading">
-    <div class="container">
-      <h2 id="gallery-heading" class="section__heading">Moments so far</h2>
-      <p class="empty-state" id="empty-state" hidden>No photos yet — be the first to share a memory.</p>
-      <div class="photo-grid" id="photo-grid"></div>
-    </div>
-  </section>
 
 </main>
 
@@ -92,14 +85,6 @@
   <p class="footer__names">Georges &amp; Renée</p>
   <p class="footer__thanks">Thank you for celebrating with us — and for every photo you share.</p>
 </footer>
-
-<div class="lightbox" id="lightbox" hidden>
-  <button class="lightbox__close" id="lightbox-close" aria-label="Close">&times;</button>
-  <figure class="lightbox__figure">
-    <img class="lightbox__img" id="lightbox-img" src="" alt="">
-    <figcaption class="lightbox__caption" id="lightbox-caption"></figcaption>
-  </figure>
-</div>
 
 <!-- Supabase client library (loaded from a CDN, no build step required) -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>

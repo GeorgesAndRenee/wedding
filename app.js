@@ -28,12 +28,6 @@ const nameInput = document.getElementById("guest-name");
 const uploadForm = document.getElementById("upload-form");
 const uploadBtn = document.getElementById("upload-btn");
 const statusEl = document.getElementById("form-status");
-const photoGrid = document.getElementById("photo-grid");
-const emptyState = document.getElementById("empty-state");
-const lightbox = document.getElementById("lightbox");
-const lightboxImg = document.getElementById("lightbox-img");
-const lightboxCaption = document.getElementById("lightbox-caption");
-const lightboxClose = document.getElementById("lightbox-close");
 
 // selectedFiles holds { file, id, status } — status: "ready" | "uploading" | "done" | "error"
 let selectedFiles = [];
@@ -191,7 +185,7 @@ uploadForm.addEventListener("submit", async (e) => {
   selectedFiles = selectedFiles.filter((f) => f.status !== "done");
 
   if (successCount === toUpload.length) {
-    setStatus("Thank you! Your photos are in the gallery below.", "success");
+    setStatus("Thank you! Your photos have been saved for Georges & Renée.", "success");
     uploadForm.reset();
     nameInput.value = guestName; // keep the name filled in for a second batch
   } else if (successCount > 0) {
@@ -204,77 +198,4 @@ uploadForm.addEventListener("submit", async (e) => {
   updateUploadButton();
 });
 
-/* --------------------------------- Gallery --------------------------------- */
 
-function escapeForAlt(text) {
-  return text.replace(/\s+/g, " ").trim();
-}
-
-function buildPhotoCard(row) {
-  const card = document.createElement("button");
-  card.type = "button";
-  card.className = "photo-card";
-
-  const img = document.createElement("img");
-  img.src = row.url;
-  img.alt = `Photo shared by ${escapeForAlt(row.guest_name || "a guest")}`;
-  img.loading = "lazy";
-  card.appendChild(img);
-
-  const label = document.createElement("span");
-  label.className = "photo-card__name";
-  label.textContent = row.guest_name || "A guest"; // textContent — never innerHTML — so a guest's
-  card.appendChild(label);                          // name can never inject markup into the page
-
-  card.addEventListener("click", () => openLightbox(row));
-  return card;
-}
-
-function openLightbox(row) {
-  lightboxImg.src = row.url;
-  lightboxImg.alt = `Photo shared by ${escapeForAlt(row.guest_name || "a guest")}`;
-  lightboxCaption.textContent = row.guest_name || "A guest";
-  lightbox.hidden = false;
-}
-function closeLightbox() {
-  lightbox.hidden = true;
-  lightboxImg.src = "";
-}
-lightboxClose.addEventListener("click", closeLightbox);
-lightbox.addEventListener("click", (e) => { if (e.target === lightbox) closeLightbox(); });
-document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeLightbox(); });
-
-async function loadGallery() {
-  const { data, error } = await client
-    .from(TABLE)
-    .select("*")
-    .order("created_at", { ascending: false })
-    .limit(300);
-
-  if (error) {
-    console.error(error);
-    return;
-  }
-
-  photoGrid.innerHTML = "";
-  if (!data.length) {
-    emptyState.hidden = false;
-    return;
-  }
-  emptyState.hidden = true;
-  for (const row of data) {
-    photoGrid.appendChild(buildPhotoCard(row));
-  }
-}
-
-// Live updates: as soon as any guest's upload lands in the table,
-// everyone currently viewing the page sees it appear immediately.
-client
-  .channel("public:photos")
-  .on("postgres_changes", { event: "INSERT", schema: "public", table: TABLE }, (payload) => {
-    emptyState.hidden = true;
-    photoGrid.prepend(buildPhotoCard(payload.new));
-  })
-  .subscribe();
-
-loadGallery();

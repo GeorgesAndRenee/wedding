@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Georges &amp; Renée — Admin</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="admin.css">
+</head>
+<body>
+
+<div class="login-screen" id="login-screen">
+  <form class="login-card" id="login-form" novalidate>
+    <h1 class="login-title">Admin sign in</h1>
+    <p class="login-sub">Georges &amp; Renée's wedding photos</p>
+
+    <div class="field">
+      <label for="admin-email">Email</label>
+      <input type="email" id="admin-email" autocomplete="username" required>
+    </div>
+    <div class="field">
+      <label for="admin-password">Password</label>
+      <input type="password" id="admin-password" autocomplete="current-password" required>
+    </div>
+
+    <p class="login-error" id="login-error" role="alert"></p>
+    <button type="submit" class="btn btn--full" id="login-btn">Log in</button>
+  </form>
+</div>
+
+<div class="admin-screen" id="admin-screen" hidden>
+  <header class="admin-header">
+    <div>
+      <h1 class="admin-title">Georges &amp; Renée — Photos</h1>
+      <p class="admin-count" id="photo-count"></p>
+    </div>
+    <div class="admin-actions">
+      <button type="button" class="btn" id="download-all-btn">Download all as ZIP</button>
+      <button type="button" class="btn btn--ghost" id="logout-btn">Log out</button>
+    </div>
+  </header>
+
+  <p class="admin-status" id="admin-status" role="status" aria-live="polite"></p>
+  <p class="empty-state" id="empty-state" hidden>No photos uploaded yet.</p>
+
+  <div class="admin-grid" id="admin-grid"></div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
+<script src="admin.js"></script>
+</body>
+</html>
