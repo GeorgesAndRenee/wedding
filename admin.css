@@ -118,6 +118,29 @@ h1 { font-family: var(--font-display); font-weight: 500; margin: 0; }
   color: color-mix(in srgb, var(--charcoal) 65%, transparent);
   margin: 16px 0;
 }
+.admin-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 24px;
+  flex-wrap: wrap;
+}
+.admin-toolbar__label {
+  font-size: 0.85rem;
+  color: color-mix(in srgb, var(--charcoal) 70%, transparent);
+}
+.admin-toolbar select {
+  padding: 10px 12px;
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  border: 1px solid color-mix(in srgb, var(--charcoal) 25%, transparent);
+  border-radius: var(--radius);
+  background: var(--paper);
+  color: var(--charcoal);
+  min-width: 220px;
+  cursor: pointer;
+}
+.admin-toolbar select:focus { border-color: var(--gold); }
 .empty-state {
   text-align: center;
   color: color-mix(in srgb, var(--charcoal) 55%, transparent);

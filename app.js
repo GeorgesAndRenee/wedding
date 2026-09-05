@@ -14,8 +14,8 @@ const TABLE = "photos";
 // Client-side limits (also set matching limits on the bucket itself
 // in the Supabase dashboard — see README.md — since anyone can bypass
 // checks that only run in the browser).
-const MAX_FILES_PER_BATCH = 25;
-const MAX_FILE_SIZE_MB = 25;
+const MAX_FILES_PER_BATCH = 15;
+const MAX_FILE_SIZE_MB = 15;
 
 // ---------------------------------------------------------------------
 
@@ -140,6 +140,12 @@ function setStatus(message, kind) {
   if (kind) statusEl.classList.add(`form-status--${kind}`);
 }
 
+function slugifyName(name) {
+  return (
+    name.trim().toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "") || "guest"
+  );
+}
+
 /* --------------------------------- Upload --------------------------------- */
 
 uploadForm.addEventListener("submit", async (e) => {
@@ -157,7 +163,8 @@ uploadForm.addEventListener("submit", async (e) => {
 
     try {
       const safeName = entry.file.name.replace(/[^a-zA-Z0-9.\-_]/g, "_");
-      const path = `${Date.now()}-${entry.id.slice(0, 8)}-${safeName}`;
+      const folder = slugifyName(guestName);
+      const path = `${folder}/${Date.now()}-${entry.id.slice(0, 8)}-${safeName}`;
 
       const { error: uploadError } = await client.storage
         .from(BUCKET)
