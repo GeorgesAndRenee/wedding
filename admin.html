@@ -51,6 +51,19 @@
     <select id="name-filter">
       <option value="">All guests</option>
     </select>
+
+    <label class="admin-toolbar__select-all">
+      <input type="checkbox" id="select-all">
+      Select all shown
+    </label>
+  </div>
+
+  <div class="bulk-bar" id="bulk-bar" hidden>
+    <span class="bulk-bar__count" id="bulk-count"></span>
+    <div class="bulk-bar__actions">
+      <button type="button" class="btn" id="download-selected-btn">Download selected</button>
+      <button type="button" class="btn btn--danger" id="delete-selected-btn">Delete selected</button>
+    </div>
   </div>
 
   <p class="empty-state" id="empty-state" hidden>No photos uploaded yet.</p>
