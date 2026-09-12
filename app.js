@@ -8,6 +8,7 @@
 const SUPABASE_URL = "https://hhuremghrfgpxyjjxtrq.supabase.co";
 const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhodXJlbWdocmZncHh5amp4dHJxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODg2MzI0NTYsImV4cCI6MjEwNDIwODQ1Nn0.7JFxVYFw9crWPk4FvJMU0waYJUsFUnnHwYUtFLUh-N4";
 
+
 const BUCKET = "wedding-photos";
 const TABLE = "photos";
 
@@ -19,7 +20,19 @@ const MAX_FILE_SIZE_MB = 15;
 
 // ---------------------------------------------------------------------
 
-const client = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+// persistSession/autoRefreshToken are off on purpose: this page is for
+// guests and should always act as a plain anonymous visitor, even on a
+// browser where someone previously logged into admin.html. Without this,
+// a leftover admin session gets reused here, uploads get sent as
+// "authenticated" instead of "anon", and fail with a row-level-security
+// error since only "anon" is allowed to insert.
+const client = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
+  auth: {
+    persistSession: false,
+    autoRefreshToken: false,
+    detectSessionInUrl: false,
+  },
+});
 
 const dropzone = document.getElementById("dropzone");
 const fileInput = document.getElementById("file-input");
