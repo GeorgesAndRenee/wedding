@@ -6,7 +6,7 @@
 // keeping this key secret.
 // =====================================================================
 const SUPABASE_URL = "https://hhuremghrfgpxyjjxtrq.supabase.co";
-const SUPABASE_ANON_KEY = "sb_publishable_-yS_D38jzS-5j1Xwk2Qn4A_Ug-hkqHW";
+const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhodXJlbWdocmZncHh5amp4dHJxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODg2MzI0NTYsImV4cCI6MjEwNDIwODQ1Nn0.7JFxVYFw9crWPk4FvJMU0waYJUsFUnnHwYUtFLUh-N4";
 
 const BUCKET = "wedding-photos";
 const TABLE = "photos";
